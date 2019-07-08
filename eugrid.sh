@@ -152,10 +152,17 @@ for i in $(seq 0 $((${num_points}-2))); do
   cd ..
 
   # if ! [ `ls -1A ./eucode_grid/sabund/ | wc -l` -eq 0 ] ; then
-  if [ "$(ls ./eucode_grid/sabund)" ]; then
+  count=`ls -1 ./eucode_grid/sabund/*.txt 2>/dev/null | wc -l`
+  if [ $count != 0 ]
+  then
     mv "./eucode_grid/sabund/"*".txt" "./eucode_dead/sabund/"
     mv "./eucode_grid/model/"*".txt" "./eucode_dead/model/"
-  fi
+  fi 
+
+  # if [[ -e "./eucode_grid/sabund/000.txt" ]]; then
+  #   mv "./eucode_grid/sabund/"*".txt" "./eucode_dead/sabund/"
+  #   mv "./eucode_grid/model/"*".txt" "./eucode_dead/model/"
+  # fi
 
 
   # printf "\n\nWhile dead: \n"

@@ -34,6 +34,7 @@ strom=np.loadtxt("./Results/Stars/frontdata.txt")
 try:
     stars=data[:,6:]
 except:
+    data=np.array(data).reshape(1,len(data))
     stars=data[0,6:]
 halo=[(stars[x][0]+strom[x]) for x in range(len(stars))]
 
