@@ -4,7 +4,7 @@ C      driver for routine stiff, d chemistry
       INTEGER KMAXX,NMAX,nm,nz,neq,ihnu,nq,ne,nnz,nstars,nlines,i,
      .   n,counter
       PARAMETER (KMAXX=200,NMAX=100,nm=21,neq=27
-     .   ,ne=2,nstars=2,nlines=1576)
+     .   ,ne=2,nstars=3,nlines=1576)
       DOUBLE PRECISION dxsav,eps,hstart,x1,x2,y(neq),xp,yp,
      .   omegab,h100,z,tr,den,w0,dtdz,w(3),xs,tc,tr1,ye(ne),
      .   zm(nm),tm(nm),tm2(nm),zstep0,zstep,zstart,xinp(8),

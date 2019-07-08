@@ -132,6 +132,12 @@ cd ..
 cd ..
 
 #MODELS GRID POINTS
+# if ! [ "$(ls ./Code/eucode_grid/sabund)" ]; then
+#   mkdir ./Code/eucode_grid/sabund/
+#   mkdir ./Code/eucode_grid/model
+#   printf "\nYEET\n\nYEET\n"
+# fi
+
 for i in $(seq 0 $((${num_points}-2))); do
   printf "\n\nModeling grid point %s: \n\n" "$((${i}+1))"
 

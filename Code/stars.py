@@ -119,7 +119,7 @@ pctocmcube=2.94e-73 #conversion factor
 #MODEL
 
 #halo model constants
-halo = 10.0**5.0 #halo mass in solar masses
+halo = 10.0**5.5 #halo mass in solar masses
 sfe = 0.6e-3 #Hartwig et al. 2015
 imf=1.35 #value for Salpeter IMF
 nden = float(np.loadtxt("./Code/eucode_background/denhalo.txt"))

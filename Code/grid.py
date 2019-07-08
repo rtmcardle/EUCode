@@ -31,7 +31,10 @@ def sweight(v):
 
 data=np.loadtxt("./Results/Stars/stardata.txt")
 strom=np.loadtxt("./Results/Stars/frontdata.txt")
-stars=data[:,6:]
+try:
+    stars=data[:,6:]
+except:
+    stars=data[0,6:]
 halo=[(stars[x][0]+strom[x]) for x in range(len(stars))]
 
 
