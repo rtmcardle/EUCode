@@ -2,7 +2,7 @@ c Calls recfast for e,H,H+,He,He+
       PROGRAM xstiff
 C      driver for routine stiff, d chemistry
       INTEGER KMAXX,NMAX,nm,nz,neq,ihnu,nq,ne,nnz
-      PARAMETER (KMAXX=200,NMAX=100,nm=21,neq=27
+      PARAMETER (KMAXX=200,NMAX=100,nm=21,neq=23
      .   ,ne=2)
       DOUBLE PRECISION dxsav,eps,hstart,x1,x2,y(neq),xp,yp,
      .   omegab,h100,z,tr,den,w0,dtdz,w(3),xs,tc,tr1,ye(ne),

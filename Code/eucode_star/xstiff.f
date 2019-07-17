@@ -2,7 +2,7 @@ c Calls recfast for e,H,H+,He,He+
       PROGRAM xstiff
 C      driver for routine stiff, d chemistry
       INTEGER KMAXX,NMAX,nm,nz,neq,ihnu,nq,ne,nnz
-      PARAMETER (KMAXX=200,NMAX=100,nm=21,neq=27
+      PARAMETER (KMAXX=200,NMAX=100,nm=21,neq=24
      .   ,ne=2)
       DOUBLE PRECISION dxsav,eps,hstart,x1,x2,y(neq),xp,yp,
      .   omegab,h100,z,tr,den,w0,dtdz,w(3),xs,tc,tr1,ye(ne),
@@ -11,7 +11,7 @@ C      driver for routine stiff, d chemistry
      .   wdm,ys(5),yr(3),zinitial,zfinal,tnow,wvac,h0,nnow,zeq,
      .   OmegaT,OmegaL,OmegaK,OmegaC,a,b,denhalo,pi,deplete,
      .   mass,lifetime,teff,srad,Q,zbirth,age,frad,
-     .   alpha,dep
+     .   alpha,dep,onoff(9)
       INTEGER kmax,kount,nbad,nok
       COMMON /path/ kmax,kount,dxsav,xp(KMAXX),yp(NMAX,KMAXX)
       common /idata/ den,xinp,ihnu
@@ -23,6 +23,7 @@ C      driver for routine stiff, d chemistry
       common/Cosmo/tnow,hO,nnow,zeq,OmegaT,OmegaL,OmegaK
       common/zLIST/zinitial,zfinal,nnz
       common/star/deplete
+      common/onoffd/onoff
       EXTERNAL input,rates,derivs,stifbs,tspln,splint,estate,derivsp,
      . recfast
 c
@@ -46,6 +47,16 @@ c
       frad=srad
       deplete=(srad/frad)**2
       pi=3.14159265359d0
+c
+      open(unit=14, file='initabundance.data')
+      do j=1,neq
+          read (14,*) y(j)
+      end do
+      close(unit=14)
+c
+      open(unit=8,file='input.data')
+      read(8,*) (onoff(i), i=1,9)
+      close(unit=8)
 c
        eps=1.0d-5
        hstart=100.0d0
@@ -95,8 +106,9 @@ c z< 1000 for models 2 and 4
       if (z .ge. 600.0d0) then
          tc=2.728d0*(1.0d0+z)
       else
-         call splint(zm,tm,tm2,nm,z,tr1)
-         tc=tr1
+c         call splint(zm,tm,tm2,nm,z,tr1)
+c         tc=tr1
+          tc=y(24)
       end if
 c
 c  call recfast to get H,H+,e,He,He+
@@ -120,11 +132,6 @@ c                     H2+,H2,HeH+,H3+,HD+,HD,HeD+,H2D+, 8
 c                     He2+,LiH+,LiH                     3
 c                     H*,D*,H,H+,e,He,He+                7
 c
-       open(unit=14, file='initabundance.data')
-       do j=1,neq
-           read (14,*) y(j)
-       end do
-       close(unit=14)
 c
 c      write(6,*) 'time', 'H','p','e','H-'
 c      write(6,*) x1,y
@@ -146,8 +153,9 @@ c z < 1000 for models 2 and 4
       if (z .ge. 600.0d0) then
          tc=2.728d0*(1.0d0+z)
       else
-         call splint(zm,tm,tm2,nm,z,tr1)
-         tc=tr1
+c         call splint(zm,tm,tm2,nm,z,tr1)
+c         tc=tr1
+         tc=y(24)
          if ((z.le.zbirth).AND.(age.le.lifetime)) then
          alpha=3.6d-12*(tc/300.0d0)**(-.750d0)
          tr=teff
@@ -160,7 +168,7 @@ c z < 1000 for models 2 and 4
          close(7)
          else
             tr=2.728d0*(1.0d0+z)
-c            deplete=1.0d0
+            deplete=1.0d0
             open(unit=7, file='zrd.txt', access='append')
             write(7,998) z, 0.0d0
             close(7)
@@ -190,7 +198,7 @@ c
       endif
           write(17,998) z,
      .    y(1),y(2),y(3),tc,tr
-       tc=tr1
+c       tc=tr1
       enddo
 
 

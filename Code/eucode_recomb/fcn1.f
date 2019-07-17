@@ -7,7 +7,7 @@ c the derivatives are returned
 c
 c various data including rate coefficients are supplied
 c in common blocks rdata and idata
-c 
+c
 c----------------------------------------
 c written by S. Lepp ca 1984
 c modified by P. C. Stancil, 6-25-96
@@ -15,7 +15,7 @@ c----------------------------------------
 c
 c x   fractional abundance of each gas-particle species
 c
-c xr  temporary storage of x 
+c xr  temporary storage of x
 c
 c ia,ib temporary storage of specied index number
 c
@@ -67,6 +67,7 @@ c determine H* and D* fractional abundances
           if(ia.eq.-2) xr(2)=xinp(2)*xinp(4)
           if(ia.eq.-3) xr(2)=xinp(3)*x(2)
       else
+          write(6,*) 'i = ', i
           stop 'can not happen ib=0 1'
       endif
 c
@@ -89,4 +90,3 @@ c
 c
       return
       end
-

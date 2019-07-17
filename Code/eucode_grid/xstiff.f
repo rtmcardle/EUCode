@@ -3,8 +3,8 @@ c Calls recfast for e,H,H+,He,He+
 C      driver for routine stiff, d chemistry
       INTEGER KMAXX,NMAX,nm,nz,neq,ihnu,nq,ne,nnz,nstars,nlines,i,
      .   n,counter
-      PARAMETER (KMAXX=200,NMAX=100,nm=21,neq=27
-     .   ,ne=2,nstars=4,nlines=1576)
+      PARAMETER (KMAXX=200,NMAX=100,nm=21,neq=24
+     .   ,ne=2,nstars=var0,nlines=var1)
       DOUBLE PRECISION dxsav,eps,hstart,x1,x2,y(neq),xp,yp,
      .   omegab,h100,z,tr,den,w0,dtdz,w(3),xs,tc,tr1,ye(ne),
      .   zm(nm),tm(nm),tm2(nm),zstep0,zstep,zstart,xinp(8),
@@ -119,8 +119,9 @@ c z< 1000 for models 2 and 4
       if (z .ge. 600.0d0) then
         tc=2.728d0*(1.0d0+z)
       else
-        call splint(zm,tm,tm2,nm,z,tr1)
-        tc=tr1
+c        call splint(zm,tm,tm2,nm,z,tr1)
+c        tc=tr1
+        tc=y(24)
       end if
 c
 c  call recfast to get H,H+,e,He,He+
@@ -173,8 +174,9 @@ c z < 1000 for models 2 and 4
           if (z .ge. 600.0d0) then
             tc=2.728d0*(1.0d0+z)
           else
-            call splint(zm,tm,tm2,nm,z,tr1)
-            tc=tr1
+c            call splint(zm,tm,tm2,nm,z,tr1)
+c            tc=tr1
+            tc=y(24)
             if (frad(m,n).ge.dist(n)) then
               tr=teff(n)
               deplete=(srad(n)/dist(n))**2

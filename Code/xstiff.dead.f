@@ -2,7 +2,7 @@ c Calls recfast for e,H,H+,He,He+
       PROGRAM xstiff
 C      driver for routine stiff, d chemistry
       INTEGER KMAXX,NMAX,nm,nz,neq,ihnu,nq,ne,nnz
-      PARAMETER (KMAXX=200,NMAX=100,nm=21,neq=22
+      PARAMETER (KMAXX=200,NMAX=100,nm=21,neq=24
      .   ,ne=2,nstars=var0)
       DOUBLE PRECISION dxsav,eps,hstart,x1,x2,y(neq),xp,yp,
      .   omegab,h100,z,tr,den,w0,dtdz,w(3),xs,tc,tr1,ye(ne),
@@ -104,8 +104,9 @@ c z< 1000 for models 2 and 4
 c      if (z .ge. 1000.0d0) then
          tc=2.728d0*(1.0d0+z)
       else
-         call splint(zm,tm,tm2,nm,z,tr1)
-         tc=tr1
+c         call splint(zm,tm,tm2,nm,z,tr1)
+c         tc=tr1
+          tc=y(24)
       end if
 c
 c  call recfast to get H,H+,e,He,He+
@@ -187,7 +188,8 @@ c      if (z .ge. 1000.0d0) then
          tc=2.728d0*(1.0d0+z)
       else
 c         call splint(zm,tm,tm2,nm,z,tr1)
-         tc=yr(3)
+c         tc=yr(3)
+          tc=y(24)
         end if
 c      end if
 c

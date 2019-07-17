@@ -86,7 +86,7 @@ c
       goto 501
 502   name(i)='       '
       n=i-1
-c      print*,'n=',n
+      print*,'n=',n
 c
 c assign non-solve particle parameters
 c

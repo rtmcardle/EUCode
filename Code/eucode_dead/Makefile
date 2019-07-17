@@ -1,13 +1,13 @@
 FC=gfortran
-FOPTS=-O 
+FOPTS=-O
 lirec: xstiff.o input.o rates.o indx.o fcn1.o fcnj.o ke.o \
 	jacder.o tspln.o estate.o derivsp.o fcn1p.o kspln.o \
-	kspln1.o kspln2.o hspln.o \
+	kspln1.o kspln2.o hspln.o fcnjt.o \
 	recfast.o stifbs.o simpr.o pzextr.o ludcmp.o \
-	luksub.o odeint.o spline.o splint.o	
+	luksub.o odeint.o spline.o splint.o
 	$(FC) -o lirec $(FOPTS) xstiff.o input.o \
 	rates.o indx.o fcn1.o fcnj.o ke.o jacder.o \
-	tspln.o estate.o derivsp.o fcn1p.o \
+	tspln.o estate.o derivsp.o fcn1p.o fcnjt.o \
 	kspln.o kspln1.o kspln2.o hspln.o recfast.o \
 		stifbs.o \
 		simpr.o \
@@ -48,6 +48,8 @@ kspln1.o:
 	$(FC) $(FOPTS) -c kspln1.f
 kspln2.o:
 	$(FC) $(FOPTS) -c kspln2.f
+fcnjt.o:
+	$(FC) $(FOPTS) -c fcnjt.f
 hspln.o:
 	$(FC) $(FOPTS) -c hspln.f
 recfast.o:
@@ -70,4 +72,4 @@ splint.o:
 	$(FC) $(FOPTS) -c splint.f
 
 clean:
-	/bin/rm  xstiff.o input.o core xstiff 
+	/bin/rm  xstiff.o input.o core xstiff

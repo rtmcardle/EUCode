@@ -53,7 +53,7 @@ c
          rj=0
          pj=pj+1
          if (i.eq. nreacs) goto 108
-      end if 
+      end if
       if (i.eq. nreacs) goto 10
  108  continue
  999  format(31(e10.4,1x))

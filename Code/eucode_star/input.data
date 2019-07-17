@@ -1,0 +1,15 @@
+1.d0 1.d0 1.d0 1.d0 1.d0 1.d0 1.d0 1.d0 1.d0
+# input parameters
+#
+# (redshift (z<365))
+# cooling/heating functions on (1) or off (0)
+# 1. H2 radiative cooling
+# 2. HD radiative cooling
+# 3. HeH+ radiative cooling
+# 4. LiH radiative cooling
+# 5. H2 formation cooling
+# 6. H2 dissociation cooling
+# 7. Compton heating/cooling
+# 8. Bremsstahlung cooling
+# 9. Atomic cooling processes (ionization, excitation,
+#    radiative and dielectronic recombination - H,He,He+)

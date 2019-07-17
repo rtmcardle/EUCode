@@ -1,3 +1,5 @@
+c 06-17-99 pcs, jacobian for particle densities
+c               with respect to collision temp.
 c+++++++++++++++++++++++++++++++++++++++++++++++++
 c subroutine to set-up jacobian of rate equations
 c
@@ -22,24 +24,22 @@ c r, nreacs, xkp, xk, den ihnu, xinp, and idim,
 c are defined in input.f
 c
 c----------------------------------------------
-      subroutine fcnj(n,x,pd)
+      subroutine fcnjt(n,x,pd)
 c      implicit double precision (a-h,o-z)
       integer r,ihnu,maxr,maxx,idim,i,j,n,nreacs,ia,ib
       parameter (maxr =200)
       parameter (maxx =100)
       parameter (idim = 3)
-      double precision x(n),pd(maxx,maxx),den,
-     . drate1,drate2
+      double precision x(n),pd(maxx),den,
+     . drate1
 c  df(i)/dx(j) loaded into pd(i,j).
       double precision xinp(idim),xr(2)
       dimension r(maxr,6)
-      double precision xk(maxr),xkp(maxr,4)
-      common /rdata/ r,xk,xkp,nreacs
+      double precision dxk(maxr),xkp(maxr,4)
+      common /rddata/r,dxk,nreacs
       common /idata/ den,xinp,ihnu
       do i = 1,maxx
-      do j = 1,maxx
-      pd(i,j)=0.0d0
-      enddo
+      pd(i)=0.0d0
       enddo
 c
 c determine reactant type and correct
@@ -73,23 +73,14 @@ c determine H* and D* fractional abundances
 c
 c determine derivatives of reaction rates
 
-      drate1=den*xr(2)*xk(i)
-      drate2=den*xr(1)*xk(i)
+      drate1=den*xr(1)*xr(2)*dxk(i)
 c
 c determine jacobian
 c 
-      if(ia.gt.0) then
         do 109 j= 1,3
- 109       if(r(i,j).gt.0) pd(r(i,j),ia)=pd(r(i,j),ia)-drate1
+ 109       if(r(i,j).gt.0) pd(r(i,j))=pd(r(i,j))-drate1
         do 110 j=4,6
- 110       if(r(i,j).gt.0) pd(r(i,j),ia)=pd(r(i,j),ia)+drate1
-      endif
-      if(ib.gt.0) then
-        do 209 j= 1,3
- 209       if(r(i,j).gt.0) pd(r(i,j),ib)=pd(r(i,j),ib)-drate2
-        do 210 j=4,6
- 210       if(r(i,j).gt.0) pd(r(i,j),ib)=pd(r(i,j),ib)+drate2
-      endif
+ 110       if(r(i,j).gt.0) pd(r(i,j))=pd(r(i,j))+drate1
  108  continue
       return
       end

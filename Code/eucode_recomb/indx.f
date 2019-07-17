@@ -9,17 +9,17 @@ c modified by P. C. Stancil, 6-25-96
 c-----------------------------------------------------
 c item   particle name to determine index for
 c
-c table1 contains list of gas particle names previously 
+c table1 contains list of gas particle names previously
 c        read from species.data
 c
 c n1     total number of gas particle types
 c
 c table2 contains list of non-solve particles, photons
 c        in this case
-c        
+c
 c n2     number of non-solve particles
 c
-c----------------------------------------------------- 
+c-----------------------------------------------------
       integer function indx(item,table1,n1,table2,n2)
       implicit double precision (a-h,o-z)
       integer n1,n2
@@ -46,4 +46,3 @@ c
       write(6,*) 'can not find item'
       return
       end
-

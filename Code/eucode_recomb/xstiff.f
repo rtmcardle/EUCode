@@ -2,7 +2,7 @@ c Calls recfast for e,H,H+,He,He+
       PROGRAM xstiff
 C      driver for routine stiff, d chemistry
       INTEGER KMAXX,NMAX,nm,nz,neq,ihnu,nq,ne,nnz
-      PARAMETER (KMAXX=200,NMAX=100,nm=21,neq=27
+      PARAMETER (KMAXX=200,NMAX=100,nm=21,neq=23
      .   ,ne=2)
       DOUBLE PRECISION dxsav,eps,hstart,x1,x2,y(neq),xp,yp,
      .   omegab,h100,z,tr,den,w0,dtdz,w(3),xs,tc,tr1,ye(ne),
@@ -84,8 +84,9 @@ c z< 1000 for models 2 and 4
       if (z .ge. 600.0d0) then
          tc=2.728d0*(1.0d0+z)
       else
-         call splint(zm,tm,tm2,nm,z,tr1)
-         tc=tr1
+c         call splint(zm,tm,tm2,nm,z,tr1)
+c         tc=tr1
+          tc=y(24)
       end if
 c
 c  call recfast to get H,H+,e,He,He+
@@ -142,7 +143,7 @@ c
 c  calculate rates
       call rates(tr,tc,z)
 c
-c      print *, 'tr=',tr,'tc=',tc,'z=',z
+      print *, 'tr=',tr,'tc=',tc,'z=',z
       call odeint(y,neq,x1,x2,eps,hstart,0.d0,nok,nbad,derivs,stifbs)
        write(16,998) z,(y(i),i=1,neq),
      .              ye(1)*y(1),ye(2)*y(2)
@@ -169,6 +170,7 @@ c
       do j=1,neq
         write (20,*) y(j)
       end do
+      write (20,*) tc
       close(unit=20)
 c
 
