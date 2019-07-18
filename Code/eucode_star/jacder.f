@@ -33,14 +33,23 @@ c
      .  everg=1.60217733d-12)
 c      COMMON /prop/ w,nhd
       common /idata/ den,xinp,ihnu
-      common /temp/ tc,gamma,mu
-      common /prop/ tr,w0,den0
+c      common /temp/ tc,gamma,mu
+      common /temp/ tc
+c      common /prop/ tr,w0,den0
+      common /prop/ tr
       common /onoffd/ onoff
-      external fcnj,estate
+      external fcnj,fcnjt,estate
 c
 c      call estate(2,tc,ye)
 c      y(24)=y(1)*ye(1)
 c      y(22)=y(5)*ye(2)
+
+      gamma=1.66666667d0
+      mu=1.32d0
+      w0=0.06d0
+      den0=den
+
+
       do 11 i=1,nmax
         dfdx(i)=0.0d0
 11    continue
