@@ -16,8 +16,8 @@ C      driver for routine stiff, d chemistry
       COMMON /path/ kmax,kount,dxsav,xp(KMAXX),yp(NMAX,KMAXX)
       common /idata/ den,xinp,ihnu
       common /ndata/ nq
-      common /prop/ tr
-      common /temp/ tc
+      common /prop/ tr,wb0,den0
+      common /temp/ tc,gamma,mu
       common /exci/ yrd
       common /seager/ ys
       common/Cosmo/tnow,hO,nnow,zeq,OmegaT,OmegaL,OmegaK
@@ -72,6 +72,9 @@ c
        nnow=0.0d0
        zeq=0.0d0
        zstep=zstep0
+       wb0=w0
+       mu=1.32d0
+       gamma=1.66666667d0
 c
 c  spline fit LiH+ equilibrium constants k1 and k2
       call kspln
@@ -145,6 +148,7 @@ c time to redshift conversion
      . /dsqrt(1.0d0+w0*z)
       x2=x1+dtdz*zstep
       den=1.123d-5*(1.0d0-yhe)*omegab*h100**2*(1.0d0+z)**3
+      den0=den
       if(z.eq.100.0d0) denhalo=den
 c black-body radiation temperature
       tr=2.728d0*(1.0d0+z)
@@ -182,7 +186,7 @@ c
       call odeint(y,neq,x1,x2,eps,hstart,0.d0,nok,nbad,derivs,stifbs)
        write(16,998) z,(y(i),i=1,neq),
      .              ye(1)*y(1),ye(2)*y(2)
-       call derivsp(z,y)
+c       call derivsp(z,y)
       write(35,998) z,tr,tc,den,x2
       x1=x2
       z=z-zstep
