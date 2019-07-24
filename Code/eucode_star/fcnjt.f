@@ -16,7 +16,7 @@ c modified by P. C. Stancil, 6-25-96
 c----------------------------------------
 c pd jacobian matrix
 c
-c drate1,drate2 rate derivatives  
+c drate1,drate2 rate derivatives
 c
 c x, xr, ia, and ib are defined in fcn1.f
 c
@@ -76,12 +76,15 @@ c determine derivatives of reaction rates
       drate1=den*xr(1)*xr(2)*dxk(i)
 c
 c determine jacobian
-c 
+c
         do 109 j= 1,3
  109       if(r(i,j).gt.0) pd(r(i,j))=pd(r(i,j))-drate1
         do 110 j=4,6
  110       if(r(i,j).gt.0) pd(r(i,j))=pd(r(i,j))+drate1
  108  continue
+      do i = 1,maxx
+c     pd(i,j)=0.0d0
+      print *, 'pd(',i,')=', pd(i)
+      enddo
       return
       end
-

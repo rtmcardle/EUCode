@@ -9,6 +9,7 @@
         aamax=0.d0
         do 11 j=1,n
           if (dabs(a(i,j)).gt.aamax) aamax=dabs(a(i,j))
+c          print *, a(i,j)
 11      continue
         if (aamax.eq.0.d0) pause 'singular matrix in ludcmp'
         vv(i)=1.d0/aamax

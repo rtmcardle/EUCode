@@ -11,7 +11,7 @@ C      driver for routine stiff, d chemistry
      .   wdm,ys(5),yr(3),zinitial,zfinal,tnow,wvac,h0,nnow,zeq,
      .   OmegaT,OmegaL,OmegaK,OmegaC,a,b,denhalo,pi,deplete,
      .   mass,lifetime,teff,srad,Q,zbirth,age,frad,
-     .   alpha,dep,onoff(9)
+     .   alpha,dep,onoff(9),gamma,mu,wb0,den0
       INTEGER kmax,kount,nbad,nok
       COMMON /path/ kmax,kount,dxsav,xp(KMAXX),yp(NMAX,KMAXX)
       common /idata/ den,xinp,ihnu
@@ -20,7 +20,7 @@ C      driver for routine stiff, d chemistry
       common /temp/ tc,gamma,mu
       common /exci/ yrd
       common /seager/ ys
-      common/Cosmo/tnow,hO,nnow,zeq,OmegaT,OmegaL,OmegaK
+      common/Cosmo/tnow,HO,nnow,zeq,OmegaT,OmegaL,OmegaK
       common/zLIST/zinitial,zfinal,nnz
       common/star/deplete
       common/onoffd/onoff

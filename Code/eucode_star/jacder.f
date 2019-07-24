@@ -53,7 +53,9 @@ c
       do 21 j=1,24
         dfdy(24,j)=0.0d0
 21    continue
+      print *, 'FCNJT!'
       call fcnjt(n,y,dfdytc)
+      print *, 'DONE!'
       do 22 j=1,23
         dfdy(j,24)=dfdytc(j)
 c don't need according to Shapiro & Kang ????
